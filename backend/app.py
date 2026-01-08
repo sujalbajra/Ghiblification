@@ -70,13 +70,14 @@ async def ghiblification_api(
         # For simplicity and typical Ghibli Diffusion usage, 512x512 output is standard.
         init_image = raw_img.resize((512, 512), Image.LANCZOS)
 
-        prompt = "A Studio Ghibli–style scene with soft pastel colors, clean anime line art, and a calm, nostalgic mood. A young character stands in the foreground with expressive eyes, natural proportions, and gentle shading. The background is highly detailed and hand-painted: lush greenery, distant hills, wooden houses, drifting clouds, warm sunlight, and light haze for depth. Textures are watercolor-like with soft shadows, subtle highlights, and small whimsical details such as birds, insects, or floating particles. High detail, soft global illumination, balanced composition." # Fixed prompt
+        prompt = "ghibli style, a beautiful young character with expressive eyes, standing in a lush summer meadow, traditional hand-painted background, soft watercolor textures, rolling green hills, quaint wooden houses, fluffy white cumulus clouds, gentle sunlight, warm haze, whimsical atmosphere, clean line art, high detail, masterpiece, by Hayao Miyazaki."
         
         result = ghibli_pipe(
             prompt=prompt,
+            negative_prompt="photorealistic, 3D render, CGI, digital painting, oil painting, heavy outlines, blurry, soft, bad anatomy, extra limbs, distorted face, messy lines, grainy, dark, moody, sharp shadows, high contrast, oversaturated.",
             image=init_image,
-            strength=0.75,
-            guidance_scale=7.5
+            strength=0.65,
+            guidance_scale=9.0
         ).images[0]
         
         # The output from the Ghibli pipeline is 512x512, so we don't resize it back to original_size
